@@ -12,6 +12,10 @@ export const PostModel = model({
   slug: "post",
   fields: {
     title: string({ required: true }),
+    likedBy: link({
+      target: "user",
+      kind: "many",
+    }),
     content: string({ required: true }),
     createdBy: link({
       target: "user",

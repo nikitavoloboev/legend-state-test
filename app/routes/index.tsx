@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { observable } from "@legendapp/state"
+import { createServerFn } from "@tanstack/start"
+import { useQuery } from "@tanstack/react-query"
+import { getUsers } from "lib/ronin/ronin"
 
 // Type your Store interface
 interface Todo {
@@ -36,6 +39,12 @@ const store$ = observable<Store>({
 })
 
 function RouteComponent() {
+  const { data, isError } = useQuery({
+    queryKey: ["/"],
+    queryFn: async () => await routeQuery({}),
+  })
+  console.log(data, "data")
+
   return (
     <>
       <div>test</div>
@@ -45,4 +54,11 @@ function RouteComponent() {
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
+})
+
+const routeQuery = createServerFn({
+  method: "GET",
+}).handler(async (ctx) => {
+  const users = await getUsers()
+  return users
 })
