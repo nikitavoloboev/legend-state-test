@@ -39,7 +39,7 @@ const store$ = observable<Store>({
 })
 
 function RouteComponent() {
-  const { data, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ["/"],
     queryFn: async () => await routeQuery({}),
   })
