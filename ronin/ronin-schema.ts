@@ -1,0 +1,21 @@
+import { link, model, string } from "ronin/schema"
+
+export const UserModel = model({
+  slug: "user",
+  fields: {
+    name: string({ required: true }),
+    bio: string(),
+  },
+})
+
+export const PostModel = model({
+  slug: "post",
+  fields: {
+    title: string({ required: true }),
+    content: string({ required: true }),
+    createdBy: link({
+      target: "user",
+      required: true,
+    }),
+  },
+})
