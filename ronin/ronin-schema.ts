@@ -3,7 +3,7 @@ import { link, model, string } from "ronin/schema"
 export const UserModel = model({
   slug: "user",
   fields: {
-    name: string({ required: true }),
+    name: string({ required: true, unique: true }),
     bio: string(),
   },
 })
